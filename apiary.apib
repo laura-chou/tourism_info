@@ -1,0 +1,155 @@
+FORMAT: 1A
+HOST: https://polls.apiblueprint.org/
+
+# TourismInfo API
+
+This is tourism info api description file, use [Open Data](https://data.gov.tw/) provide data.  
+● [restaurant](https://data.gov.tw/dataset/7779)  
+● [scenic spot](https://data.gov.tw/dataset/7777)  
+● [hotel](https://data.gov.tw/dataset/7780)
+
+# Group Food Info
+**attributes**
+
+- Id `(Number)` : index
+- Add `(String)` : restaurant address
+- Name `(String)` : restaurant name
+- Tel `(String)` : phone number
+- Opentime `(String)` : open time
+- Website `(String)` : website url
+- Description `(String)` : restaurant description
+- Pictures `(Object)` : pictures url
+
+## Collection [/food-info]
+
+### Get Food Info [GET]
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "message": "",
+            "result": [
+                {
+                    "Id": 1,
+                    "Add": "restaurant address",
+                    "Name": "restaurant name",
+                    "Tel": "886-4-1234567",
+                    "Opentime": "08:00-22:00",
+                    "Website": "https://www.google.com.tw/",
+                    "Description": "restaurant description",
+                    "Pictures": [
+                        "https://picture1.url",
+                        "https://picture2.url"
+                    ]
+                },
+                ...
+            ]
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "success": false,
+            "message": "error message"
+        }
+
+# Group Tourist Spots
+**attributes**
+
+- Id `(Number)` : index
+- Add `(String)` : tourist spots address
+- Name `(String)` : tourist spots name
+- Tel `(String)` : phone number
+- Opentime `(String)` : open time
+- Ticketinfo `(String)` : ticket information
+- Travellinginfo `(String)` : travelling information
+- Website `(String)` : website url
+- Toldescribe `(String)` : tourist spots description
+- Pictures `(Object)` : pictures url
+
+## Collection [/tourist-spots]
+
+### Get Tourist Spots [GET]
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "message": "",
+            "result": [
+                {
+                    "Id": 1,
+                    "Add": "tourist spots address",
+                    "Name": "tourist spots name",
+                    "Tel": "886-3-1234567",
+                    "Opentime": "09:00-18:00",
+                    "Ticketinfo": "ticket information",
+                    "Travellinginfo": "travelling information",
+                    "Website": "https://www.google.com.tw/",
+                    "Toldescribe": "tourist spots description",
+                    "Pictures": [
+                        "https://picture1.url",
+                        "https://picture2.url"
+                    ]
+                },
+                ...
+            ]
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "success": false,
+            "message": "error message"
+        }
+
+# Group Hotel Info
+**attributes**
+
+- Id `(Number)` : index
+- Add `(String)` : hotel address
+- Name `(String)` : hotel name
+- Tel `(String)` : phone number
+- Opentime `(String)` : open time
+- Website `(String)` : website url
+- Serviceinfo `(Object)` : service information
+- Description `(String)` : hotel description
+- Pictures `(Object)` : pictures url
+
+## Collection [/hotel-info]
+
+### Get Hotel Info [GET]
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "message": "",
+            "result": [
+                {
+                    "Id": 1,
+                    "Add": "hotel address",
+                    "Name": "hotel name",
+                    "Tel": "886-4-1234567",
+                    "Website": "https://www.google.com.tw/",
+                    "Serviceinfo": [
+                        "service1",
+                        "service2"
+                    ],
+                    "Description": "hotel description",
+                    "Pictures": [
+                        "https://picture1.url",
+                        "https://picture2.url"
+                    ]
+                },
+                ...
+            ]
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "success": false,
+            "message": "error message"
+        }
