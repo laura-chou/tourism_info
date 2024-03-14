@@ -1,0 +1,29 @@
+{
+  "name": "tourism_info",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "ant-design-vue": "^4.0.7",
+    "axios": "^1.6.2",
+    "bootstrap": "^5.3.2",
+    "pinia": "^2.1.7",
+    "pinia-plugin-persist": "^1.0.0",
+    "vue": "^3.3.8",
+    "vue-clipboard3": "^2.0.0",
+    "vue-composable": "^1.0.0-beta.24",
+    "vue-feather": "^2.0.0",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.4",
+    "@vue/eslint-config-standard": "^8.0.1",
+    "pug": "^3.0.2",
+    "stylus": "^0.61.0",
+    "vite": "^2.9.15"
+  }
+}

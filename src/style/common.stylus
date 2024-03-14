@@ -1,0 +1,63 @@
+$cloudy-knoxville-color = linear-gradient(to bottom, #fdfbfb 0%, #ebedee 100%)
+$saint-petersburg-color = linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)
+$h-100 = 100%
+display-flex = {
+  display: flex,
+  align-items: center,
+  justify-content: center
+}
+
+body,html
+  height $h-100
+  background-image $saint-petersburg-color
+
+#app
+  height $h-100
+
+.menu
+  height inherit
+  {display-flex}
+  for i in (1..2)
+    &:nth-child({i})
+      border-bottom 1px solid #000
+  &:hover
+    cursor pointer
+    background-image: $cloudy-knoxville-color
+
+.loading
+  height $h-100
+  {display-flex}
+
+.not-found
+  height $h-100
+  {display-flex}
+  flex-direction column
+  img
+    width 200px
+    height 200px
+
+#showData
+  height $h-100
+  overflow-y scroll
+  button,input
+    &:focus
+      outline none !important
+      box-shadow none
+  .accordion
+    --bs-accordion-active-bg transpaent
+  .collapse-color
+    background-image: $cloudy-knoxville-color
+  .pagnation
+    border-width 1px
+    padding: 0 0.5rem 0 0.5rem
+    border-top 1px solid
+    border-bottom 1px solid
+    display flex
+    align-items center
+  .no-data
+    height 600px
+    {display-flex}
+    flex-direction column
+    img
+      width 200px
+      height 200px
