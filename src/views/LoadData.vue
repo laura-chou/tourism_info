@@ -2,18 +2,15 @@
 import { onMounted } from 'vue'
 import { useStore } from '@/stores/index.js'
 import { useRoute, useRouter } from 'vue-router'
-import { storeToRefs } from 'pinia'
 const route = useRoute()
 const router = useRouter()
 const store = useStore()
-const { originData } = storeToRefs(store)
 
 onMounted(async () => {
   try {
-    await store.getData(route.params)
-    if (originData.value.length > 0) {
-      router.push(`/show${location.pathname}`)
-    }
+    const params = route.params
+    await store.getData(params)
+    router.push(`/show/${store.getDataPath(params)}`)
   } catch (error) {
     router.push('/404')
   }

@@ -5,7 +5,7 @@ import ShowData from '@/views/ShowData.vue'
 import NotFound from '@/views/NotFound.vue'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('tourism_info'),
   routes: [
     {
       path: '/',

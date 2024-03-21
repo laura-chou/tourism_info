@@ -15,7 +15,7 @@ export const useStore = defineStore({
     paginationOffset: 0,
     collapseClass: 'collapse-color',
     showPrevious: true,
-    reload: false
+    isReload: false
   }),
   getters: {
     isNullOrEmpty: () => {
@@ -33,13 +33,8 @@ export const useStore = defineStore({
   },
   actions: {
     async getData (params) {
-      let url = `${import.meta.env.VITE_APIURL}${params.type}/`
       this.type = this.getTypeByPath(params.type)
-      if (this.validateParams(params, 'region') &&
-      this.validateParams(params, 'town')) {
-        url += `${params.region}/${params.town}`
-        this.showPrevious = false
-      }
+      const url = `${import.meta.env.VITE_APIURL}${this.getDataPath(params)}/`
       await axios.get(url)
         .then(response => {
           for (const key in response.data.result) {
@@ -55,11 +50,17 @@ export const useStore = defineStore({
           throw new Error(error.message)
         })
     },
+    getDataPath (params) {
+      let regionPath = ''
+      if (Object.prototype.hasOwnProperty.call(params, 'region') &&
+          Object.prototype.hasOwnProperty.call(params, 'town')) {
+        regionPath = `/${params.region}/${params.town}`
+        this.showPrevious = false
+      }
+      return `${params.type}${regionPath}`
+    },
     getTypeByPath (path) {
       return this.getMenu.find(item => item.path === path).type
-    },
-    validateParams (params, key) {
-      return Object.prototype.hasOwnProperty.call(params, key)
     },
     searchResult () {
       let filterData = []
@@ -78,8 +79,8 @@ export const useStore = defineStore({
         filterData[key].Order = parseInt(key) + 1
       }
       this.searchData = filterData
-      if (this.reload) {
-        this.reload = false
+      if (this.isReload) {
+        this.isReload = false
       } else {
         this.paginationPage = 1
         this.paginationOffset = 0
@@ -147,9 +148,9 @@ export const useStore = defineStore({
     enabled: true,
     strategies: [
       {
-        key: 'store',
+        key: 'tourism_info',
         storage: sessionStorage,
-        paths: ['type', 'searchText', 'paginationPage', 'paginationOffset', 'reload']
+        paths: ['originData', 'type', 'searchText', 'paginationPage', 'paginationOffset', 'isReload', 'showPrevious']
       }
     ]
   }

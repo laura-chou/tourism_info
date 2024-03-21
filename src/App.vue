@@ -4,7 +4,7 @@ import { onMounted } from 'vue'
 const store = useStore()
 onMounted(() => {
   window.addEventListener('beforeunload', () => {
-    store.reload = true
+    store.isReload = true
   })
 })
 </script>

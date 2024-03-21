@@ -4,13 +4,10 @@ import HotelInfo from '@/views/HotelInfo.vue'
 import TouristSpots from '@/views/TouristSpots.vue'
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRoute, useRouter } from 'vue-router'
 import { useStore } from '@/stores/index.js'
 
 const store = useStore()
-const route = useRoute()
-const router = useRouter()
-const { type, searchData, originData, paginationPageSize, paginationOffset } = storeToRefs(store)
+const { type, isReload, searchData, paginationPageSize, paginationOffset } = storeToRefs(store)
 
 const searchDataList = computed(() => {
   const array = searchData.value
@@ -20,11 +17,9 @@ const searchDataList = computed(() => {
   return array.slice(offset, offset + pageSize)
 })
 
-if (originData.value.length === 0) {
-  const pathName = location.pathname
-  router.push(pathName.substring(5, pathName.length))
+if (isReload.value) {
+  store.searchResult()
 }
-
 </script>
 
 <template lang="pug">
