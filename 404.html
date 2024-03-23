@@ -6,11 +6,7 @@
   </head>
   <body>
     <script>
-      const path = window.location.href.replace(
-        /https?:\/\/[a-z]+\.[a-z]+\//,
-        '/'
-      );
-      window.location.href = path + '/index.html';
+      sessionStorage.redirect = location.href;
     </script>
   </body>
 </html>
