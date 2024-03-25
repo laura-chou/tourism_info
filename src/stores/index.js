@@ -59,6 +59,9 @@ export const useStore = defineStore({
       }
       return `${params.type}${regionPath}`
     },
+    getPathByType (type) {
+      return this.getMenu.find(item => item.type === type).path
+    },
     getTypeByPath (path) {
       return this.getMenu.find(item => item.path === path).type
     },

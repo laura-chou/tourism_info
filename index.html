@@ -7,17 +7,6 @@
     <title>旅食住行網</title>
   </head>
   <body>
-    <script>
-      (function(){
-        if (sessionStorage.redirect != "undefined") {
-          const redirect = sessionStorage.redirect;
-          delete sessionStorage.redirect;
-          if (redirect && redirect !== location.href) {
-            window.history.pushState(null, null, "/show/" + redirect);
-          }
-        }
-      })();
-    </script>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
