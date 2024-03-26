@@ -19,5 +19,5 @@ if (isReload.value) {
 div.d-flex.flex-column.justify-content-evenly.h-100
   div.menu(v-for="item in store.getMenu" @click="link(item.path)")
     h2.fw-bold {{ item.name }}
-  div {{ isReload }}
+  div {{ type }}
 </template>
