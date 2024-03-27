@@ -5,6 +5,7 @@ const store = useStore()
 onMounted(() => {
   window.addEventListener('beforeunload', () => {
     store.isReload = true
+    store.type = 99
   })
 })
 </script>

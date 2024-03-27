@@ -83,7 +83,7 @@ export const useStore = defineStore({
       }
       this.searchData = filterData
       if (this.isReload) {
-        // this.isReload = false
+        this.isReload = false
       } else {
         this.paginationPage = 1
         this.paginationOffset = 0
