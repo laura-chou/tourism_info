@@ -22,9 +22,12 @@ if (isReload.value) {
 }
 
 onMounted(() => {
-  window.addEventListener('pagehide', () => {
+  // window.addEventListener('pagehide', () => {
+  //   store.isReload = true
+  // })
+  window.onpagehide = (event) => {
     store.isReload = true
-  })
+  }
 })
 </script>
 
