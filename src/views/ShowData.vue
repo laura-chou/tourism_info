@@ -22,7 +22,7 @@ if (isReload.value) {
 }
 
 onMounted(() => {
-  window.addEventListener('visibilitychange', () => {
+  window.addEventListener('pagehide', () => {
     store.isReload = true
   })
 })
