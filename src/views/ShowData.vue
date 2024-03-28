@@ -2,7 +2,7 @@
 import FoodInfo from '@/views/FoodInfo.vue'
 import HotelInfo from '@/views/HotelInfo.vue'
 import TouristSpots from '@/views/TouristSpots.vue'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useStore } from '@/stores/index.js'
 
@@ -20,6 +20,12 @@ const searchDataList = computed(() => {
 if (isReload.value) {
   store.searchResult()
 }
+
+onMounted(() => {
+  window.addEventListener('beforeunload', () => {
+    store.isReload = true
+  })
+})
 </script>
 
 <template lang="pug">
