@@ -22,7 +22,7 @@ if (isReload.value) {
 }
 
 onMounted(() => {
-  window.addEventListener('beforeunload', () => {
+  window.addEventListener('visibilitychange', () => {
     store.isReload = true
   })
 })
