@@ -1,18 +1,19 @@
 import "dotenv/config";
 import cors, { CorsOptions } from "cors";
 import express, { Express, NextFunction, Request, Response } from "express";
-import morgan from "morgan";
+import morgan, { token } from "morgan";
+
+import { responseHandler } from "./common/response";
 import { isJestTest, isNullOrEmpty } from "./common/utils";
 import { LogLevel, setLog } from "./core/logger";
 import protectedRoutes from "./routes/protected.routes";
 import publicRoutes from "./routes/public.routes";
-import { responseHandler } from "./common/response";
 
 const app: Express = express();
 const whiteList: string[] = process.env.WHITELIST?.split(",") || [];
 const loggedOrigins = new Set<string>();
 
-morgan.token("apiPath", (req: Request) => `${req.method} ${req.originalUrl}`);
+token("apiPath", (req: Request) => `${req.method} ${req.originalUrl}`);
 app.use(morgan(":apiPath", {
   immediate: true,
   stream: {
@@ -34,6 +35,7 @@ const corsOptions: CorsOptions = {
     if (isJestTest) {
       callback(null, true);
     }
+
     if (!isNullOrEmpty(origin)) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const hostName: string = new URL(origin!).hostname;

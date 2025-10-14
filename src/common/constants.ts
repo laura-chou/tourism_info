@@ -8,6 +8,14 @@ export const HTTP_STATUS = {
   SERVER_ERROR: 500
 } as const;
 
+export const CONTENT_TYPE = {
+  JSON: "application/json",
+  JSON_WITH_CHARSET: /application\/json/,
+  TEXT: "text/plain",
+  TEXT_WITH_CHARSET: /text\/plain/,
+  FORM_URLENCODED: "application/x-www-form-urlencoded"
+} as const;
+
 export const RESPONSE_MESSAGE = {
   SUCCESS: "",
   NOT_FOUND: "No data found.",
