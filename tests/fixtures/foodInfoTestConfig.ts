@@ -4,7 +4,7 @@ export const ROUTE = {
   BASE: `${base}/台北市/大安區`
 } as const;
 
-export interface ProcessedFoodItem {
+export interface FoodInfo {
   Id: number
   Add: string
   Name: string
@@ -48,7 +48,7 @@ export const MOCK_ORIGIN_DATA = {
   },
 };
 
-export const MOCK_FORMAT_DATA: ProcessedFoodItem[] = [
+export const MOCK_FORMAT_DATA: FoodInfo[] = [
   {
     Id: 1,
     Add: "台北市大安區信義路四段123號",

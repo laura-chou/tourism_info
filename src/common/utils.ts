@@ -25,6 +25,9 @@ export interface ProcessedInfo {
   Region: string;
   Town: string;
   Opentime?: string;
+  Ticketinfo: string;
+  Travellinginfo: string;
+  Toldescribe: string;
   Serviceinfo: string;
   Serviceinfos?: string[];
   Picture1?: string;
