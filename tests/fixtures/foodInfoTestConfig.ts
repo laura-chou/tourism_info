@@ -1,7 +1,7 @@
 const base = "/food-info";
 
 export const ROUTE = {
-  BASE: base
+  BASE: `${base}/台北市/大安區`
 } as const;
 
 export interface ProcessedFoodItem {
@@ -31,6 +31,18 @@ export const MOCK_ORIGIN_DATA = {
           Picture1: "picture1.jpg",
           Picture2: "picture2.jpg",
         },
+        {
+          Region: "台北市",
+          Town: "大安區",
+          Add: "台北市大安區信義路四段123號",
+          Name: "信義茶坊",
+          Tel: "886-2-27001234",
+          Opentime: "09:00-21:00",
+          Website: "https://example.com/tea",
+          Description: "品茗好去處，都市中的靜謐角落。",
+          Picture1: "taipei1.jpg",
+          Picture2: "taipei2.jpg"
+        }
       ],
     },
   },
@@ -39,15 +51,15 @@ export const MOCK_ORIGIN_DATA = {
 export const MOCK_FORMAT_DATA: ProcessedFoodItem[] = [
   {
     Id: 1,
-    Add: "彰化縣員林市員水路二段390號",
-    Name: "林桔園蜜餞行",
-    Tel: "886-4-8351196",
-    Opentime: "08:00-22:00",
-    Website: "https://goo.gl/qMe98p",
-    Description: "這是一個景點介紹",
+    Add: "台北市大安區信義路四段123號",
+    Name: "信義茶坊",
+    Tel: "886-2-27001234",
+    Opentime: "09:00-21:00",
+    Website: "https://example.com/tea",
+    Description: "品茗好去處，都市中的靜謐角落。",
     Pictures: [
-      "picture1.jpg",
-      "picture2.jpg"
+      "taipei1.jpg",
+      "taipei2.jpg"
     ]
   }
 ];

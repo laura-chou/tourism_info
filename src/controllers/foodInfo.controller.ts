@@ -43,13 +43,13 @@ export const getFoodInfo = setFunctionName(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await axios.get(process.env.FOODINFO_URL!)
       .then(result => {
-        const responseData = result.data.XML_Head.Infos.Info;
-        // if ("town" in request.params && "region" in request.params) {
-        //   responseData = responseData.filter((item: OriginFoodItem) =>
-        //     item.Region === request.params.region &&
-        //     item.Town === request.params.town
-        //   );
-        // }
+        let responseData = result.data.XML_Head.Infos.Info;
+        if ("town" in request.params && "region" in request.params) {
+          responseData = responseData.filter((item: OriginFoodItem) =>
+            item.Region === request.params.region &&
+            item.Town === request.params.town
+          );
+        }
 
         responseData.forEach((item: ProcessedFoodItem) => {
           ReplaceValue(item);
