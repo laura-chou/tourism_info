@@ -18,7 +18,7 @@ app.use(morgan(":apiPath", {
   immediate: true,
   stream: {
     write: (message: string) => {
-      setLog(LogLevel.HTTP, message.trim());
+      setLog(LogLevel.HTTP, decodeURIComponent(message.trim()));
     }
   }
 }));

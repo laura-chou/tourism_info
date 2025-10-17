@@ -1,8 +1,10 @@
 import { foodInfoRoutes } from "./foodInfo.route";
+import { hotelInfoRoutes } from "./hotelInfo.route";
 import { RouteConfig } from "./route.utils";
 
 const protectedRoutes: Array<RouteConfig> = [
-  foodInfoRoutes()
+  foodInfoRoutes(),
+  hotelInfoRoutes()
 ];
 
 export default protectedRoutes;

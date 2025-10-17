@@ -2,39 +2,13 @@ import axios from "axios";
 import { Request, Response } from "express";
 
 import { responseHandler } from "../common/response";
-import { isNullOrEmpty, ReplaceValue, setFunctionName } from "../common/utils";
+import { ProcessedInfo, OriginPlaceBase, isNullOrEmpty, ReplaceValue, setFunctionName } from "../common/utils";
 import { setLog, LogLevel, LogMessage } from "../core/logger";
 
 import * as baseController from "./base.controller";
 
-interface OriginFoodItem {
-  Region: string
-  Town: string
-  Add?: string
-  Name: string
-  Tel?: string
-  Opentime?: string
-  Website?: string
-  Description?: string
-  Picture1?: string
-  Picture2?: string
-  Picture3?: string
-}
-
-export interface ProcessedFoodItem {
-  Id: number
-  Add: string
-  Region: string
-  Town: string
-  Name: string
-  Tel: string
-  Opentime: string
-  Website?: string
-  Description?: string
-  Picture1?: string
-  Picture2?: string
-  Picture3?: string
-  Pictures: string[]
+interface OriginFoodInfo extends OriginPlaceBase {
+  Opentime?: string;
 }
 
 export const getFoodInfo = setFunctionName(
@@ -45,20 +19,20 @@ export const getFoodInfo = setFunctionName(
       .then(result => {
         let responseData = result.data.XML_Head.Infos.Info;
         if ("town" in request.params && "region" in request.params) {
-          responseData = responseData.filter((item: OriginFoodItem) =>
+          responseData = responseData.filter((item: OriginFoodInfo) =>
             item.Region === request.params.region &&
             item.Town === request.params.town
           );
         }
 
-        responseData.forEach((item: ProcessedFoodItem) => {
+        responseData.forEach((item: ProcessedInfo) => {
           ReplaceValue(item);
           if (isNullOrEmpty(item.Opentime)) item.Opentime = "無";
         });
 
-        const data: ProcessedFoodItem[] = responseData
+        const data: ProcessedInfo[] = responseData
           .sort(sortCondition)
-          .map((item: ProcessedFoodItem, index: number) => 
+          .map((item: ProcessedInfo, index: number) => 
           {
             return {
               Id: index + 1,
@@ -84,7 +58,7 @@ export const getFoodInfo = setFunctionName(
   "getFoodInfo"
 );
 
-const sortCondition = (x: OriginFoodItem, y: OriginFoodItem): number => {
+const sortCondition = (x: OriginFoodInfo, y: OriginFoodInfo): number => {
   if (isNullOrEmpty(x.Picture1)) return 1;
   if (isNullOrEmpty(y.Picture1)) return -1;
   if (isNullOrEmpty(x.Website)) return 1;
