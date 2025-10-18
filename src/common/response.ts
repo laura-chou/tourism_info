@@ -21,7 +21,7 @@ const sendResponse = <T>(
   };
   res.status(status).json(response);
 };
-  
+
 export const responseHandler = {
   success<T>(res: Response, data?: T): void {
     sendResponse(
@@ -32,27 +32,11 @@ export const responseHandler = {
     );
   },
 
-  created(res: Response): void {
-    sendResponse(
-      res, 
-      HTTP_STATUS.CREATED, 
-      RESPONSE_MESSAGE.SUCCESS
-    );
-  },
-
   forbidden(res: Response): void {
     sendResponse(
       res, 
       HTTP_STATUS.FORBIDDEN, 
       RESPONSE_MESSAGE.FORBIDDEN_CORS
-    );
-  },
-
-  notFound(res: Response): void {
-    sendResponse(
-      res,
-      HTTP_STATUS.NOT_FOUND,
-      RESPONSE_MESSAGE.NOT_FOUND
     );
   },
 
