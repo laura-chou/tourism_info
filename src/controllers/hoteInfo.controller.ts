@@ -2,13 +2,24 @@ import axios from "axios";
 import { Request, Response } from "express";
 
 import { responseHandler } from "../common/response";
-import { ProcessedInfo, OriginPlaceBase, isNullOrEmpty, ReplaceValue, setFunctionName } from "../common/utils";
+import { OriginBase, setFunctionName } from "../common/utils";
 import { setLog, LogLevel, LogMessage } from "../core/logger";
 
 import * as baseController from "./base.controller";
 
-interface OriginHotelInfo extends OriginPlaceBase {
+interface OriginHotelInfo extends OriginBase {
   Serviceinfo: string;
+}
+
+export interface FormatHotelInfo {
+  Id: number
+  Add: string
+  Name: string
+  Tel: string
+  Website: string
+  ServiceInfo: string[]
+  Description: string
+  Pictures: string[]
 }
 
 export const getHotelInfo = setFunctionName(
@@ -17,37 +28,29 @@ export const getHotelInfo = setFunctionName(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       await axios.get(process.env.HOTELINFO_URL!)
         .then(result => {
-          let responseData = result.data.XML_Head.Infos.Info;
-          if ("town" in request.params && "region" in request.params) {
-            responseData = responseData.filter((item: OriginHotelInfo) =>
-              item.Region === request.params.region &&
-              item.Town === request.params.town
-            );
-          }
+          const rawData = result.data.XML_Head.Infos.Info;
+          const responseData = baseController.filterByRegionAndTown<OriginHotelInfo>(rawData, request);
 
-          responseData = responseData.map((item: ProcessedInfo) => {
-            const replaced = ReplaceValue(item);
-            if (!isNullOrEmpty(replaced.Serviceinfo)) {
-              replaced.Serviceinfos = replaced.Serviceinfo.split(",").filter(el => el);
-            }
-            if (!isNullOrEmpty(replaced.Description) && replaced.Description.length === 1) {
-              replaced.Description = "";
-            }
-            return replaced;
-          });
+          const data: FormatHotelInfo[] = responseData
+            .sort(baseController.sortByPictureAndWebsite)
+            .map((item: OriginHotelInfo, index: number) => 
+              {
+                const address = baseController.getValidAddress(item.Add, item.Region, item.Town);
+                const telephone = baseController.getDisplayTel(item.Tel);
+                const serviceInfo = item.Serviceinfo.split(",").filter(ele => ele);
+                const pictures = baseController.getValidPictures(item.Picture1, item.Picture2, item.Picture3);
 
-          const data: ProcessedInfo[] = responseData
-            .sort(sortCondition)
-            .map((item: ProcessedInfo, index: number) => ({
-              Id: index + 1,
-              Add: item.Add,
-              Name: item.Name,
-              Tel: item.Tel,
-              Website: item.Website,
-              Serviceinfos: item.Serviceinfos,
-              Description: item.Description,
-              Pictures: item.Pictures
-            }));
+                return { 
+                  Id: index + 1,
+                  Add: address,
+                  Name: item.Name,
+                  Tel: telephone,
+                  Website: item.Website,
+                  ServiceInfo: serviceInfo,
+                  Description: item.Description,
+                  Pictures: pictures
+                };
+              });
           setLog(LogLevel.INFO, LogMessage.SUCCESS, getHotelInfo.name);
           responseHandler.success(response, data);
         })
@@ -60,11 +63,3 @@ export const getHotelInfo = setFunctionName(
   },
   "getHotelInfo"
 );
-
-const sortCondition = (x: OriginHotelInfo, y: OriginHotelInfo): number => {
-  if (isNullOrEmpty(x.Picture1)) return 1;
-  if (isNullOrEmpty(y.Picture1)) return -1;
-  if (isNullOrEmpty(x.Website)) return 1;
-  if (isNullOrEmpty(y.Website)) return -1;
-  return 0;
-};

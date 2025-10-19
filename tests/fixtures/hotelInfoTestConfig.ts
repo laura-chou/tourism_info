@@ -1,19 +1,9 @@
+import { FormatHotelInfo } from "./../../src/controllers/hoteInfo.controller";
 const base = "/hotel-info";
 
 export const ROUTE = {
   BASE: `${base}/花蓮縣/吉安鄉`
 } as const;
-
-export interface HotelInfo {
-  Id: number
-  Add: string
-  Name: string
-  Tel: string
-  Website: string
-  Serviceinfos: string[]
-  Description: string
-  Pictures: string[]
-}
 
 export const MOCK_ORIGIN_DATA = {
   XML_Head: {
@@ -50,14 +40,14 @@ export const MOCK_ORIGIN_DATA = {
   },
 };
 
-export const MOCK_FORMAT_DATA: HotelInfo[] = [
+export const MOCK_FORMAT_DATA: FormatHotelInfo[] = [
   {
     Id: 1,
     Add: "花蓮縣吉安鄉和平路88號",
     Name: "山嵐民宿",
     Tel: "03-8888-1234",
     Website: "https://shanlanbnb.example.com",
-    Serviceinfos: [
+    ServiceInfo: [
       "提供接駁服務",
       "早餐",
       "腳踏車租借"

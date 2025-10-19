@@ -1,21 +1,10 @@
+import { FormatTouristSpots } from "../../src/controllers/touristSpots.controller";
+
 const base = "/tourist-spots";
 
 export const ROUTE = {
   BASE: `${base}/新北市/平溪區`
 } as const;
-
-export interface TouristSpots {
-  Id: number
-  Add: string
-  Name: string
-  Tel: string
-  Opentime: string
-  Ticketinfo: string
-  Travellinginfo: string
-  Website?: string
-  Toldescribe: string
-  Pictures: string[]
-}
 
 export const MOCK_ORIGIN_DATA = {
   XML_Head: {
@@ -49,7 +38,7 @@ export const MOCK_ORIGIN_DATA = {
           Picture1: "picture1.jpg",
           Picture2: "picture2.jpg",
           Picture3: "picture3.jpg",
-          Changetime: "2025-10-18",
+          Changetime: "2025-10-19",
           Travellinginfo: "搭乘台灣好行795至平溪站，步行至平溪瀑布旁登山口；自駕可沿106縣道至台電公司前右轉。",
           Ticketinfo: "免費參觀"
         }
@@ -58,21 +47,22 @@ export const MOCK_ORIGIN_DATA = {
   },
 };
 
-export const MOCK_FORMAT_DATA: TouristSpots[] = [
+export const MOCK_FORMAT_DATA: FormatTouristSpots[] = [
   {
     Id: 1,
     Add: "新北市平溪區石底里靜安路二段",
     Name: "慈母峰登山步道",
     Tel: "02-2495-1510",
-    Ticketinfo: "免費參觀",
-    Travellinginfo: "搭乘台灣好行795至平溪站，步行至平溪瀑布旁登山口；自駕可沿106縣道至台電公司前右轉。",
+    TicketInfo: "免費參觀",
+    TravellingInfo: "搭乘台灣好行795至平溪站，步行至平溪瀑布旁登山口；自駕可沿106縣道至台電公司前右轉。",
     Website: "https://newtaipei.travel/zh-cn/attractions/detail/110680",
-    Toldescribe: "慈母峰為平溪三名山之一，海拔410公尺，步道由石底橋登山口起，沿途設有岩石階梯與鐵欄杆，適合登山新手挑戰。登頂後可遠眺平溪山景，並可連走普陀山與孝子山。",
+    Description: "慈母峰為平溪三名山之一，海拔410公尺，步道由石底橋登山口起，沿途設有岩石階梯與鐵欄杆，適合登山新手挑戰。登頂後可遠眺平溪山景，並可連走普陀山與孝子山。",
     Pictures: [
       "picture1.jpg",
       "picture2.jpg",
       "picture3.jpg"
     ],
-    Opentime: "全年開放"
+    OpenTime: "全年開放",
+    ChangeTime: "2025-10-19"
   }
 ];

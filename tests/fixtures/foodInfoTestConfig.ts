@@ -1,19 +1,10 @@
+import { FormatFoodInfo } from "../../src/controllers/foodInfo.controller";
+
 const base = "/food-info";
 
 export const ROUTE = {
   BASE: `${base}/台北市/大安區`
 } as const;
-
-export interface FoodInfo {
-  Id: number
-  Add: string
-  Name: string
-  Tel: string
-  Opentime: string
-  Website?: string
-  Description?: string
-  Pictures: string[]
-}
 
 export const MOCK_ORIGIN_DATA = {
   XML_Head: {
@@ -48,13 +39,13 @@ export const MOCK_ORIGIN_DATA = {
   },
 };
 
-export const MOCK_FORMAT_DATA: FoodInfo[] = [
+export const MOCK_FORMAT_DATA: FormatFoodInfo[] = [
   {
     Id: 1,
     Add: "台北市大安區信義路四段123號",
     Name: "信義茶坊",
     Tel: "886-2-27001234",
-    Opentime: "09:00-21:00",
+    OpenTime: "09:00-21:00",
     Website: "https://example.com/tea",
     Description: "品茗好去處，都市中的靜謐角落。",
     Pictures: [
