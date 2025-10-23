@@ -34,6 +34,19 @@ export const MOCK_ORIGIN_DATA = {
           Picture1: "picture1.jpg",
           Picture2: "picture2.jpg",
           Picture3: "picture3.jpg"
+        },
+        {
+          Region: "花蓮縣",
+          Town: "吉安鄉",
+          Add: "",
+          Name: "xyz民宿",
+          Tel: "",
+          Website: "",
+          Serviceinfo: "",
+          Description: "這是一間民宿。",
+          Picture1: "picture1.jpg",
+          Picture2: "",
+          Picture3: ""
         }
       ]
     },
@@ -57,6 +70,18 @@ export const MOCK_FORMAT_DATA: FormatHotelInfo[] = [
       "picture1.jpg",
       "picture2.jpg",
       "picture3.jpg"
+    ]
+  },
+  {
+    Id: 2,
+    Add: "花蓮縣吉安鄉",
+    Name: "xyz民宿",
+    Tel: "無",
+    Website: "",
+    ServiceInfo: [],
+    Description: "這是一間民宿。",
+    Pictures: [
+      "picture1.jpg",
     ]
   }
 ];

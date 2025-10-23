@@ -36,7 +36,7 @@ export const getHotelInfo = setFunctionName(
             .map((item: OriginHotelInfo, index: number) => 
               {
                 const address = baseController.getValidAddress(item.Add, item.Region, item.Town);
-                const telephone = baseController.getDisplayTel(item.Tel);
+                const telephone = baseController.getDisplayValue(item.Tel);
                 const serviceInfo = item.Serviceinfo.split(",").filter(ele => ele);
                 const pictures = baseController.getValidPictures(item.Picture1, item.Picture2, item.Picture3);
 

@@ -44,9 +44,9 @@ export const getTouristSpots = setFunctionName(
             .map((item: OriginTouristSpots, index: number) => 
             {
               const address = baseController.getValidAddress(item.Add, item.Region, item.Town);
-              const telephone = baseController.getDisplayTel(item.Tel);
-              const openTime = baseController.getDisplayOpenTime(item.Opentime);
-              const ticketInfo = isNullOrEmpty(item.Ticketinfo) ? "無" : item.Ticketinfo;
+              const telephone = baseController.getDisplayValue(item.Tel);
+              const openTime = baseController.getDisplayValue(item.Opentime);
+              const ticketInfo = baseController.getDisplayValue(item.Ticketinfo);
               const pictures = baseController.getValidPictures(item.Picture1, item.Picture2, item.Picture3);
 
               return {

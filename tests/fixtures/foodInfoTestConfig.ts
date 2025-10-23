@@ -33,6 +33,18 @@ export const MOCK_ORIGIN_DATA = {
           Description: "品茗好去處，都市中的靜謐角落。",
           Picture1: "taipei1.jpg",
           Picture2: "taipei2.jpg"
+        },
+        {
+          Region: "台北市",
+          Town: "大安區",
+          Add: "",
+          Name: "XYZ餐廳",
+          Tel: "",
+          Opentime: "",
+          Website: "",
+          Description: "這是一間餐廳。",
+          Picture1: "taipei1.jpg",
+          Picture2: ""
         }
       ],
     },
@@ -51,6 +63,18 @@ export const MOCK_FORMAT_DATA: FormatFoodInfo[] = [
     Pictures: [
       "taipei1.jpg",
       "taipei2.jpg"
+    ]
+  },
+  {
+    Id: 2,
+    Add: "台北市大安區",
+    Name: "XYZ餐廳",
+    Tel: "無",
+    OpenTime: "無",
+    Website: "",
+    Description: "這是一間餐廳。",
+    Pictures: [
+      "taipei1.jpg"
     ]
   }
 ];

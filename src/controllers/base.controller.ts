@@ -40,12 +40,8 @@ export const getValidAddress = (
   return isNullOrEmpty(address) ? region + town : address;
 };
 
-export const getDisplayTel = (telephone: string): string => {
-  return isNullOrEmpty(telephone) ? "無" : telephone;
-};
-
-export const getDisplayOpenTime = (openTime: string): string => {
-  return isNullOrEmpty(openTime) ? "無" : openTime;
+export const getDisplayValue = (value: string): string => {
+  return isNullOrEmpty(value) ? "無" : value;
 };
 
 export const getValidPictures = (

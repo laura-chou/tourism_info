@@ -36,8 +36,8 @@ export const getFoodInfo = setFunctionName(
             .map((item: OriginFoodInfo, index: number) => 
               {
                 const address = baseController.getValidAddress(item.Add, item.Region, item.Town);
-                const telephone = baseController.getDisplayTel(item.Tel);
-                const openTime = baseController.getDisplayOpenTime(item.Opentime);
+                const telephone = baseController.getDisplayValue(item.Tel);
+                const openTime = baseController.getDisplayValue(item.Opentime);
                 const pictures = baseController.getValidPictures(item.Picture1, item.Picture2, item.Picture3);
 
                 return {
