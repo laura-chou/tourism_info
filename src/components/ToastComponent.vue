@@ -1,12 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
-import { useStore } from '@/stores/index.js'
+import { useStore } from '@/stores'
 
 const store = useStore()
 const toastClass = computed(() => {
   return store.toastClass
 })
-
 </script>
 <template lang="pug">
 div.toast.fade(:class="toastClass" role="alert" aria-live="assertive" aria-atomic="true")

@@ -3,7 +3,14 @@ import { useStore } from '@/stores/index.js'
 
 const store = useStore()
 const props = defineProps<{
-  JsonData: object
+  JsonData: {
+    Pictures: string[]
+    Add: string
+    Tel: string
+    Website: string
+    ServiceInfo: string[]
+    Description: string
+  }
 }>()
 </script>
 
@@ -15,15 +22,16 @@ const props = defineProps<{
       copy-component.ms-2.me-2(:copyText="JsonData.Add")
       map-component(:name="JsonData.Add")
   h5.mt-3
-    strong 電話： {{ JsonData.Tel }}
+    strong 電話：
+    span {{ JsonData.Tel }}
   h5.mt-3
     strong 官方網站：
     span(v-if="store.isNullOrEmpty(JsonData.Website)") 無
     a.text-break(v-else :href="JsonData.Website" target="_blank") {{ JsonData.Website }}
   h5.mt-3
     strong 服務資訊：
-    span(v-if="store.isNullOrEmpty(JsonData.Serviceinfo)") 無
+    span(v-if="store.isNullOrEmpty(JsonData.ServiceInfo)") 無
     ul.m-2(v-else)
-      li(v-for="service in JsonData.Serviceinfo") {{ service }}
+      li(v-for="service in JsonData.ServiceInfo") {{ service }}
   h5.mt-3 {{ JsonData.Description }}
 </template>

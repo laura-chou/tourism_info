@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from '@/App.vue'
-// import router from '@/router'
+import router from '@/router'
 
 import piniaPluginPersistedstate  from 'pinia-plugin-persistedstate'
 import VueFeather from 'vue-feather'
@@ -26,5 +26,5 @@ app.component('toast-component', ToastComponent)
 app.component('picture-component', PictureComponent)
 
 app.use(pinia)
-// app.use(router)
+app.use(router)
 app.mount('#app')

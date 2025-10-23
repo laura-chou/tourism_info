@@ -1,15 +1,15 @@
-<script setup>
+<script setup lang="ts">
 import { useStore } from '@/stores/index.js'
 
 const store = useStore()
 
-defineProps({
+const props = defineProps({
   copyText: String,
 })
 
-const copy = async (text) => {
+const copy = async (text: string) => {
   try {
-    navigator.clipboard.writeText(text)
+    await navigator.clipboard.writeText(text)
     store.showToast()
   } catch (error) {}
 }

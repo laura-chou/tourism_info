@@ -3,7 +3,14 @@ import { useStore } from '@/stores/index.js'
 
 const store = useStore()
 const props = defineProps<{
-  JsonData: object
+  JsonData: {
+    Pictures: string[]
+    Add: string
+    Tel: string
+    OpenTime: string
+    Website: string
+    Description: string
+  }
 }>()
 </script>
 
