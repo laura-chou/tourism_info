@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { useStore } from '@/stores/index.js'
-
-const store = useStore()
+import { useStore } from '@/stores/index.js';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const store = useStore();
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   JsonData: {
     Pictures: string[]
@@ -11,7 +12,7 @@ const props = defineProps<{
     Website: string
     Description: string
   }
-}>()
+}>();
 </script>
 
 <template lang="pug">

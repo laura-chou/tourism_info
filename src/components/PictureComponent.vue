@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const props = defineProps({
   pictures: Object,
   id: Number
-})
+});
 
-const targetName = ref('#carousel' + props.id)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const targetName = ref('#carousel' + props.id);
 </script>
 <template lang="pug">
 img.no-picture(v-if="pictures.length == 0" src="@/assets/image.png")

@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useStore } from '@/stores/index.js'
-import { useRouter } from 'vue-router'
-const router = useRouter()
-const store = useStore()
+import { onMounted } from 'vue';
+import { useStore } from '@/stores/index.js';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+const store = useStore();
 
 onMounted(async () => {
   try {
-    await store.handleClick()
-    router.push(`/home`)
+    await store.handleClick();
+    router.push('/home');
   } catch (error) {
-    router.push('/not-found')
+    console.log(`handleClick failed:${error}`);
+    router.push('/not-found');
   }
-})
+});
 </script>
 
 <template lang="pug">

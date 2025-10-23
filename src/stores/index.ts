@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia'
-import axios from 'axios'
-import regionData from '@/assets/tw-regions.json'
+import { defineStore } from 'pinia';
+import axios from 'axios';
+import regionData from '@/assets/tw-regions.json';
 
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 
 interface RegionData {
   county: string
@@ -28,7 +28,7 @@ export const TypeUrl = {
   FOOD: 'food-info',
   HOTEL: 'hotel-info',
   SCENIC: 'tourist-spots'
-} as const
+} as const;
 
 export const useStore = defineStore('tourism-info', {
   state: () => ({
@@ -43,33 +43,33 @@ export const useStore = defineStore('tourism-info', {
   }),
   getters: {
     isNullOrEmpty: () => {
-      return (item: string) => item == null || item === '無' || item === ''
+      return (item: string) => item == null || item === '無' || item === '';
     }
   },
   actions: {
     getRegions() {
-      this.regions = regionData
+      this.regions = regionData;
     },
     clearSearchText() {
-      this.searchText = ''
+      this.searchText = '';
     },
     showToast () {
-      this.toastClass = 'show'
+      this.toastClass = 'show';
       setTimeout(() => {
-        this.toastClass = 'hide'
-      }, 1000)
+        this.toastClass = 'hide';
+      }, 1000);
     },
     async handleClick() {
-      this.isLoading = true
-      this.searchData.length = 0
+      this.isLoading = true;
+      this.searchData.length = 0;
       try {
-        const url = `${import.meta.env.VITE_APIURL}/${this.selectedType}/${this.selectedCounty}/${this.selectedTown}`
+        const url = `${import.meta.env.VITE_APIURL}/${this.selectedType}/${this.selectedCounty}/${this.selectedTown}`;
         await axios.get(url)
           .then(response => {
-            const keyword = this.searchText.trim()
-            this.searchData = response.data.data
+            const keyword = this.searchText.trim();
+            this.searchData = response.data.data;
             if (!this.isNullOrEmpty(keyword)) {
-              let filterData = this.searchData.filter((item: SearchItem) => {
+              const filterData = this.searchData.filter((item: SearchItem) => {
                 return (
                   item.Name.includes(keyword) ||
                   item.Description.includes(keyword) ||
@@ -78,19 +78,19 @@ export const useStore = defineStore('tourism-info', {
                   item.ServiceInfo?.some(service => service.includes(keyword)) ||
                   item.TicketInfo?.includes(keyword) ||
                   item.TravellingInfo?.includes(keyword)
-                )
-              })
+                );
+              });
 
-              this.searchData = filterData
+              this.searchData = filterData;
             }
           })
           .catch(error => {
-            throw new Error(error.message)
-          })
+            throw new Error(error.message);
+          });
       } finally {
-        this.isLoading = false
+        this.isLoading = false;
       }
     },
   },
   persist: true
-})
+});

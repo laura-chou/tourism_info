@@ -1,8 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import type { RouteRecordRaw } from 'vue-router'
-import LoadData from '@/views/LoadData.vue'
-import NotFound from '@/views/NotFound.vue'
-import HomeView from '@/views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
+import LoadData from '@/views/LoadData.vue';
+import NotFound from '@/views/NotFound.vue';
+import HomeView from '@/views/HomeView.vue';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -17,11 +17,11 @@ const routes: RouteRecordRaw[] = [
     path: '/:pathMatch(.*)*',
     component: NotFound
   }
-]
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
-})
+});
 
-export default router
+export default router;

@@ -1,21 +1,25 @@
 <script setup lang="ts">
-import FoodInfo from '@/views/FoodInfo.vue'
-import HotelInfo from '@/views/HotelInfo.vue'
-import TouristSpots from '@/views/TouristSpots.vue'
-import { onMounted } from 'vue'
-import { useStore, TypeUrl } from '@/stores'
-const store = useStore()
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import FoodInfo from '@/views/FoodInfo.vue';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import HotelInfo from '@/views/HotelInfo.vue';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import TouristSpots from '@/views/TouristSpots.vue';
+import { onMounted } from 'vue';
+import { useStore, TypeUrl } from '@/stores';
+const store = useStore();
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const typeOptions = [
   { label: '餐飲', value: TypeUrl.FOOD },
   { label: '住宿', value: TypeUrl.HOTEL },
   { label: '景點', value: TypeUrl.SCENIC }
-]
+];
 
 onMounted(() => {
-  store.getRegions()
-  updateTowns()
-})
+  store.getRegions();
+  updateTowns();
+});
 
 const updateTowns = () => {
   const townElement = document.getElementById('town');
@@ -30,7 +34,7 @@ const updateTowns = () => {
     townElement.appendChild(option);
   });
   store.selectedTown = towns[0];
-}
+};
 </script>
 
 <template lang="pug">
