@@ -15,11 +15,10 @@ div.toast.fade(:class="toastClass" role="alert" aria-live="assertive" aria-atomi
 </template>
 <style lang="stylus" scoped>
 .toast
-  z-index 99
   width 100px
   position absolute
   left 50%
-  top 30%
-  transform translate(-50%, -30%)
+  bottom 20%
+  transform translate(-50%, -20%)
   background-color #FFFFDF
 </style>

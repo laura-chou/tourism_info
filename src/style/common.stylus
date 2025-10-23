@@ -1,9 +1,23 @@
-$cloudy-knoxville-color = linear-gradient(to bottom, #fdfbfb 0%, #ebedee 100%)
 $saint-petersburg-color = linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)
 
 body,html
-  height 100%
   background-image $saint-petersburg-color
 
 #app
   height 100%
+
+.no-data
+  display flex
+  flex-direction column
+  align-items center
+  justify-content center
+  img
+    width 150px
+
+.ellipsis {
+  height 62%
+  display -webkit-box
+  -webkit-line-clamp 4
+  -webkit-box-orient vertical
+  overflow hidden
+}

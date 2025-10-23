@@ -34,7 +34,7 @@ div.carousel.slide.carousel-dark.carousel-fade(v-else :id="targetName.replace('#
 <style lang="stylus" scoped>
 .no-picture
   width 100%
-  height 200px
+  height 150px
   object-fit contain
 .picture
   height 300px

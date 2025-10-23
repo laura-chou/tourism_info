@@ -1,7 +1,16 @@
 <script setup lang="ts">
+import FoodInfo from '@/views/FoodInfo.vue'
+import HotelInfo from '@/views/HotelInfo.vue'
+import TouristSpots from '@/views/TouristSpots.vue'
 import { onMounted, computed } from 'vue'
-import { useStore } from '@/stores/index'
+import { useStore, TypeUrl } from '@/stores'
 const store = useStore()
+
+const typeOptions = [
+  { label: '餐飲', value: TypeUrl.FOOD },
+  { label: '住宿', value: TypeUrl.HOTEL },
+  { label: '景點', value: TypeUrl.SCENIC }
+]
 
 onMounted(() => {
   store.getRegions()
@@ -25,30 +34,51 @@ const updateTowns = () => {
 </script>
 
 <template lang="pug">
-  .container
-    .row.mt-3
-      .col-sm-12.col-md-6
-        label.form-label.fw-bold(for="county") 縣市
-        select#county.form-select(@change="updateTowns()" v-model="store.selectedCounty")
-          option(v-for="item in store.regions" :key="item.county" :value="item.county") {{ item.county }}
-      .col-sm-12.col-md-6
-        label.form-label.fw-bold.mt-sm-2(for="town") 鄉鎮區
-        select#town.form-select(v-model="store.selectedTown")
-          option(value="") 請先選擇縣市
-    .row.mt-3
-      .col-sm-12.col-md-6
-        label.form-label.fw-bold(for="type") 類型
-        select#type.form-select(v-model="store.selectedType")
-          option(value=1) 餐飲
-          option(value=2) 住宿
-          option(value=3) 景點
-      .col-sm-12.col-md-6.d-flex.align-items-end
-        .input-group.mt-sm-3
-          input.form-control(type="text" placeholder="輸入關鍵字" v-model="store.searchText")
-          button.btn.btn-secondary.d-flex(type="button" @click="store.clearSearchText()")
-            vue-feather(type="x")
-    .row
-      .col.d-grid.gap-2
-        button.btn.btn-primary.mt-3(type="button" @click="store.search()")
-          vue-feather(type="search")
+.container
+  .row.mt-3
+    .col-sm-12.col-md-6
+      label.form-label.fw-bold(for="county") 縣市
+      select#county.form-select(@change="updateTowns()" v-model="store.selectedCounty")
+        option(v-for="item in store.regions" :key="item.county" :value="item.county") {{ item.county }}
+    .col-sm-12.col-md-6
+      label.form-label.fw-bold.mt-3.mt-md-0(for="town") 鄉鎮區
+      select#town.form-select(v-model="store.selectedTown")
+        option(value="") 請先選擇縣市
+  .row.mt-3
+    .col-sm-12.col-md-6
+      label.form-label.fw-bold(for="type") 類型
+      select#type.form-select(v-model="store.selectedType")
+        option(v-for="item in typeOptions" :key="item.value" :value="item.value") {{ item.label }}
+    .col-sm-12.col-md-6.d-flex.align-items-end
+      .input-group.mt-3.mt-md-0
+        input.form-control(type="text" placeholder="輸入關鍵字" v-model="store.searchText")
+        button.btn.btn-secondary.d-flex(type="button" @click="store.clearSearchText()")
+          vue-feather(type="x")
+  .row
+    .col.d-grid.gap-2
+      button.btn.btn-primary.mt-3(type="button" @click="store.search()")
+        vue-feather(type="search")
+  .row
+    div.col-sm-12.col-md-4.mt-3(v-if="store.searchData" v-for="item in store.searchData" :key="item.Id")
+      .card.h-100
+        .card-header {{ item.Name }}
+        .card-body
+          .card-text.ellipsis {{ item.Description }}
+          div.d-flex.justify-content-end.mt-3
+            button.btn.btn-primary(data-bs-toggle="modal" :data-bs-target="'#modal' + item.Id") 更多
+      .modal.fade(:id="'modal' + item.Id" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true")
+        .modal-dialog.modal-dialog-centered
+          .modal-content
+            .modal-header
+              h5.modal-title.fw-bold {{ item.Name }}
+              copy-component.ms-2(:copyText="item.Name")
+              button.btn-close(type="button" data-bs-dismiss="modal" onclick="document.activeElement.blur()")
+            .modal-body
+              component(v-if="store.selectedType === TypeUrl.FOOD" :is="FoodInfo" :JsonData="item")
+              component(v-if="store.selectedType === TypeUrl.HOTEL" :is="HotelInfo" :JsonData="item")
+              component(v-if="store.selectedType === TypeUrl.SCENIC" :is="TouristSpots" :JsonData="item")
+          toast-component
+    div.no-data(v-else)
+      img(src="@/assets/empty.png")
+      h2.fw-bold 查無資料
 </template>

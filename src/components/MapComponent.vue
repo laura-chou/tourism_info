@@ -1,10 +1,6 @@
 <script setup>
 defineProps({
-  name: String,
-  color: {
-    type: String,
-    default: 'btn-outline-primary'
-  }
+  name: String
 })
 
 const goToMap = (name) => {
@@ -13,6 +9,6 @@ const goToMap = (name) => {
 </script>
 
 <template lang="pug">
-button.btn.d-flex(:class="color" @click="goToMap(name)")
+button.btn.btn-danger.d-flex(@click="goToMap(name)")
   vue-feather(type="map-pin")
 </template>
