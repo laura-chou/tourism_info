@@ -39,6 +39,8 @@ export const getTouristSpots = setFunctionName(
           const rawData = result.data.XML_Head.Infos.Info;
           const responseData = baseController.filterByRegionAndTown<OriginTouristSpots>(rawData, request);
 
+          rawData.length = 0;
+
           const data: FormatTouristSpots[] = responseData
             .sort(sortCondition)
             .map((item: OriginTouristSpots, index: number) => 
@@ -63,6 +65,9 @@ export const getTouristSpots = setFunctionName(
                 ChangeTime: format(item.Changetime, "yyyy-MM-dd")
               };
             });
+
+          responseData.length = 0;
+
           setLog(LogLevel.INFO, LogMessage.SUCCESS, getTouristSpots.name);
           responseHandler.success(response, data);
         })

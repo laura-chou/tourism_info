@@ -31,6 +31,8 @@ export const getHotelInfo = setFunctionName(
           const rawData = result.data.XML_Head.Infos.Info;
           const responseData = baseController.filterByRegionAndTown<OriginHotelInfo>(rawData, request);
 
+          rawData.length = 0;
+
           const data: FormatHotelInfo[] = responseData
             .sort(baseController.sortByPictureAndWebsite)
             .map((item: OriginHotelInfo, index: number) => 
@@ -51,6 +53,9 @@ export const getHotelInfo = setFunctionName(
                   Pictures: pictures
                 };
               });
+
+          responseData.length = 0;
+
           setLog(LogLevel.INFO, LogMessage.SUCCESS, getHotelInfo.name);
           responseHandler.success(response, data);
         })

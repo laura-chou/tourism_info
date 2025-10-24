@@ -31,6 +31,8 @@ export const getFoodInfo = setFunctionName(
           const rawData = result.data.XML_Head.Infos.Info;
           const responseData = baseController.filterByRegionAndTown<OriginFoodInfo>(rawData, request);
 
+          rawData.length = 0;
+
           const data: FormatFoodInfo[] = responseData
             .sort(baseController.sortByPictureAndWebsite)
             .map((item: OriginFoodInfo, index: number) => 
@@ -51,6 +53,9 @@ export const getFoodInfo = setFunctionName(
                   Pictures: pictures
                 };
               });
+
+          responseData.length = 0;
+
           setLog(LogLevel.INFO, LogMessage.SUCCESS, getFoodInfo.name);
           responseHandler.success(response, data);
         })
