@@ -66,7 +66,7 @@ const updateTowns = () => {
   .row
     div.col-sm-12.col-md-4.mt-3(v-if="store.searchData.length > 0" v-for="item in store.searchData" :key="item.Id")
       .card.h-100
-        .card-header {{ item.Name }}
+        .card-header.fw-bold {{ item.Name }}
         .card-body
           .card-text.ellipsis {{ item.Description }}
           div.d-flex.justify-content-end.mt-3

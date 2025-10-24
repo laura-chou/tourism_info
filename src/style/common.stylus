@@ -18,7 +18,7 @@ body,html
     width 150px
 
 .ellipsis {
-  height 62%
+  height 90px
   display -webkit-box
   -webkit-line-clamp 4
   -webkit-box-orient vertical
