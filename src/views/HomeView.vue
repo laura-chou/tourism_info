@@ -25,15 +25,15 @@ const updateTowns = () => {
   const townElement = document.getElementById('town');
   const towns = store.regions.find(item => item.county === store.selectedCounty)?.town || [];
 
-  townElement.innerHTML = '';
+  townElement!.innerHTML = '';
 
   towns.forEach(town => {
     const option = document.createElement('option');
     option.value = town;
     option.textContent = town;
-    townElement.appendChild(option);
+    townElement!.appendChild(option);
   });
-  store.selectedTown = towns[0];
+  store.selectedTown = towns[0]!;
 };
 </script>
 

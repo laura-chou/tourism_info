@@ -3,6 +3,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import pluginVue from 'eslint-plugin-vue';
 import { defineConfig } from 'eslint/config';
+import vueParser from 'vue-eslint-parser';
 
 export default defineConfig([
   {
@@ -17,12 +18,26 @@ export default defineConfig([
       quotes: ['error', 'single']
     }
   },
+
   tseslint.configs.recommended,
-  pluginVue.configs['flat/essential'],
-  { 
+
+  {
     files: ['**/*.vue'],
     languageOptions: {
-      parserOptions: { parser: tseslint.parser }
+      parser: vueParser,
+      parserOptions: {
+        parser: tseslint.parser,
+        ecmaVersion: 2020,
+        sourceType: 'module',
+        extraFileExtensions: ['.vue']
+      }
+    },
+    plugins: {
+      vue: pluginVue
+    },
+    rules: {
+      ...pluginVue.configs['flat/essential'].rules,
+      'vue/multi-word-component-names': 'off'
     }
   }
 ]);
