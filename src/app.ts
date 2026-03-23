@@ -2,6 +2,8 @@ import "dotenv/config";
 import cors, { CorsOptions } from "cors";
 import express, { Express, NextFunction, Request, Response } from "express";
 import morgan, { token } from "morgan";
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 
 import { responseHandler } from "./common/response";
 import { isJestTest, isNullOrEmpty } from "./common/utils";
@@ -25,6 +27,25 @@ app.use(morgan(":apiPath", {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "tourism-info-api",
+      version: "inital version",
+      description:
+        "This is tourism info api description file, use [Open Data](https://data.gov.tw/) provide data.\n" +
+        "● [restaurant](https://data.gov.tw/dataset/7779)\n" +
+        "● [scenic spot](https://data.gov.tw/dataset/7777)\n" +
+        "● [hotel](https://data.gov.tw/dataset/7780)",
+    },
+  },
+  apis: ["./src/routes/*.ts", "./src/routes/*.js"],
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 publicRoutes.forEach(route => {
   app.use(route.prefix, route.router);
