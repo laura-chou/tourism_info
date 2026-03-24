@@ -4,5 +4,5 @@
 - [景點](https://data.gov.tw/dataset/7777)  
 - [旅館民宿](https://data.gov.tw/dataset/7780)
 
-### Apiary
-#### https://tourisminfoapi.docs.apiary.io/
+### Swagger
+#### https://app.swaggerhub.com/apis-docs/private-412/tourism-info-api
