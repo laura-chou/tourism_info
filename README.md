@@ -3,4 +3,4 @@
 #### 這是一個可以查詢台灣餐飲、景點及旅館民宿的網站
 
 ### Demo
-https://laura-chou.github.io/tourism_info/
+https://laura-chou.github.io/tourism-info/
